@@ -41,7 +41,22 @@
     "config": {
         "sort-packages": true
     },
-    "scripts": {
+    "extra": {
+        "spartan": {
+            "install": {
+                "env": {
+                    "ACL_ADAPTER": "php",
+                    "ACL_PHP_RULES_FILE": "./config/acl_rules.php"
+                },
+                "copy": {
+                    "config/acl.php": "config/acl.php",
+                    "config/acl_rules.php": "config/acl_rules.php"
+                },
+                "services": [
+                    "Spartan\\Acl\\ServiceProvider::class"
+                ]
+            }
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
