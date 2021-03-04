@@ -21,11 +21,15 @@ class Php implements AclInterface
     /**
      * Php constructor.
      *
-     * @param array[] $config
+     * @param array[] $options
      */
-    public function __construct(array $config = [])
+    public function __construct(array $options = [])
     {
-        $this->withConfig($config);
+        if (isset($options['file'])) {
+            $this->withConfig(require_once $options['file']);
+        } elseif (isset($options['config'])) {
+            $this->withConfig($options['config']);
+        }
     }
 
     /**

@@ -3,7 +3,6 @@
 namespace Spartan\Acl;
 
 use Psr\Container\ContainerInterface;
-use Spartan\Acl\Adapter\Php;
 use Spartan\Acl\Definition\AclInterface;
 use Spartan\Service\Container;
 use Spartan\Service\Definition\ProviderInterface;
@@ -18,6 +17,17 @@ use Spartan\Service\Pipeline;
  */
 class ServiceProvider implements ProviderInterface
 {
+    /** @var mixed[] */
+    protected array $config = [];
+
+    /**
+     * ServiceProvider constructor
+     */
+    public function __construct()
+    {
+        $this->config = require_once './config/cache.php';
+    }
+
     /**
      * @return mixed[]
      */
@@ -26,7 +36,11 @@ class ServiceProvider implements ProviderInterface
         return [
             'acl'               => AclInterface::class,
             AclInterface::class => function ($c) {
-                return new Php(require_once './config/acl.php');
+                $adapterName    = $this->config['adapter'];
+                $adapterClass   = 'Spartan\\Acl\\Adapter\\' . ucfirst($adapterName);
+                $adapterOptions = $this->config[$adapterName];
+
+                return new $adapterClass($adapterOptions);
             },
         ];
     }
