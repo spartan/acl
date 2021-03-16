@@ -25,7 +25,7 @@ class ServiceProvider implements ProviderInterface
      */
     public function __construct()
     {
-        $this->config = require_once './config/cache.php';
+        $this->config = require_once './config/acl.php';
     }
 
     /**
