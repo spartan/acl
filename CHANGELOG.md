@@ -1,4 +1,16 @@
 # Changelog
+### [0.1.2](https://github.com/spartan/acl/compare/v0.1.1...v0.1.2) (2021-03-16)
+
+
+### Fixes
+
+* import acl config issue ([7abe219](https://github.com/spartan/acl/commit/7abe21935847fcee080b0bea44f525e2d31d53cb))
+
+
+### Changes
+
+* use resource path instead of resource and id array ([2ab6630](https://github.com/spartan/acl/commit/2ab6630c1bf7615a36b964cc32c71f3f998c160e))
+
 ### [0.1.1](https://github.com/spartan/acl/compare/v0.1.0...v0.1.1) (2021-03-04)
 
 
