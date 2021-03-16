@@ -1,4 +1,11 @@
 # Changelog
+### [0.1.3](https://github.com/spartan/acl/compare/v0.1.2...v0.1.3) (2021-03-16)
+
+
+### Fixes
+
+* global permissions on php config adapter ([49da604](https://github.com/spartan/acl/commit/49da60409a14e72fdb28e80c1a6e5964f1d32124))
+
 ### [0.1.2](https://github.com/spartan/acl/compare/v0.1.1...v0.1.2) (2021-03-16)
 
 
