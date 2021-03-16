@@ -163,7 +163,9 @@ class Php implements AclInterface
                 ?? ($this->config['perms'][$role][$resourcePath][self::ANY]
                     ?? ($this->config['perms'][$role][$resource->name()][$operation]
                         ?? ($this->config['perms'][$role][$resource->name()][self::ANY]
-                            ?? [])));
+                            ?? ($this->config['perms'][$role][self::ANY][$operation]
+                                ?? ($this->config['perms'][$role][self::ANY][self::ANY]
+                                    ?? [])))));
 
             if ($conditions == []) {
                 continue;
