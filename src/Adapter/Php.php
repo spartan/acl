@@ -87,8 +87,10 @@ class Php implements AclInterface
             $operations = self::ANY;
         }
 
+        $resourcePath = $resource->name() . ($resource->id() ? ':' . $resource->id() : '');
+
         foreach ((array)$operations as $operation) {
-            $this->config['perms'][$requester->id()][$resource->name()][$resource->id()][$operation] = $conditions ?: true;
+            $this->config['perms'][$requester->id()][$resourcePath][$operation] = $conditions ?: true;
         }
 
         return $this;
@@ -115,11 +117,13 @@ class Php implements AclInterface
             $operations = self::ANY;
         }
 
+        $resourcePath = $resource->name() . ($resource->id() ? ':' . $resource->id() : '');
+
         foreach ((array)$operations as $operation) {
             if (!$operation) {
                 $operation = self::ANY;
             }
-            $this->config['perms'][$requester->id()][$resource->name()][$resource->id()][$operation] = false;
+            $this->config['perms'][$requester->id()][$resourcePath][$operation] = false;
         }
 
         return $this;
@@ -152,11 +156,14 @@ class Php implements AclInterface
             $roles = [...$roles, ...$this->inheritedRoles($requesterRole)];
         }
 
+        $resourcePath = $resource->name() . ($resource->id() ? ':' . $resource->id() : '');
+
         foreach ($roles as $role) {
-            $conditions = $this->config['perms'][$role][$resource->name()][$resource->id()][$operation]
-                ?? ($this->config['perms'][$role][$resource->name()][$resource->id()][self::ANY]
-                    ?? ($this->config['perms'][$role][$resource->name()][self::ANY][self::ANY]
-                        ?? []));
+            $conditions = $this->config['perms'][$role][$resourcePath][$operation]
+                ?? ($this->config['perms'][$role][$resourcePath][self::ANY]
+                    ?? ($this->config['perms'][$role][$resource->name()][$operation]
+                        ?? ($this->config['perms'][$role][$resource->name()][self::ANY]
+                            ?? [])));
 
             if ($conditions == []) {
                 continue;

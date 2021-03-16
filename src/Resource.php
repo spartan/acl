@@ -39,7 +39,7 @@ class Resource implements ResourceInterface
      */
     public function id()
     {
-        return $this->data['id'] ?? Php::ANY;
+        return $this->data['id'] ?? '';
     }
 
     /**
